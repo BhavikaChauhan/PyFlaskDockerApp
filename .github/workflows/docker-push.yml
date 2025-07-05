@@ -13,6 +13,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: Debug secrets
+        run: |
+          echo "Username is: ${{ secrets.DOCKERHUB_USERNAME }}"
+          echo "Token is: ${{ secrets.DOCKERHUB_PAT != '' && '✔ set' || '❌ EMPTY' }}"
 
       - name: Log in to DockerHub
         run: echo "${{ secrets.DOCKERHUB_PAT }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
